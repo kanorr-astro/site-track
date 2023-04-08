@@ -3,6 +3,7 @@
 #module imports
 import math as m
 import numpy as np
+import matplotlib.pyplot as plt
 
 #Inputs
 Lat = 39.007                        #geodetic latitude (degrees)
@@ -51,5 +52,23 @@ if __name__ == "__main__":
     print("Radar Site Location Vector (IJK): ", RS)
     print("Radar Site Velocity Vector (IJK): ", VS)
     
+    u,v =  np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+    
+    px = ae*np.cos(u)*np.sin(v)
+    py = ae*np.sin(u)*np.sin(v)
+    pz = ae*np.cos(v)
+
+    fig = plt.figure(figsize=(15,15))
+
+    ax = fig.add_subplot(111, projection='3d')
+    ax.set_xlim(-1.5,1.5)
+    ax.set_ylim(-1.5,1.5)
+    ax.set_zlim(-1.5,1.5)
+    ax.plot_wireframe(px, py, pz, rstride=1, cstride=1, color='green', linewidth=0.5)
+    ax.quiver(0,0,0,RS[0],RS[1],RS[2])
+    ax.quiver(RS[0],RS[1],RS[2],VS[0],VS[1],VS[2], color='red')
+    plt.title('Position and Velocity Vector of Radar Station (DU)')
+    ax.view_init(azim=0, elev=30)
+    plt.show()
 
 
