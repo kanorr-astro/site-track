@@ -29,7 +29,7 @@ def dt_to_day(date_list, UT) ->float:
         return month_day[date_list[1]-1] + (date_list[0]-1) + time_to_day
 
 def long(theta_e, day ,GST_1970) ->float:
-    return m.radians(GST_1970 + theta_e) + omega*day
+    return (m.radians(GST_1970 + theta_e) + omega*day) % (2*m.pi)
 
 def dist_to_DU(dist) ->float:
     return dist / 6378.145
@@ -48,9 +48,11 @@ if __name__ == "__main__":
     z = z(Lat,H)
     RS = [x*m.cos(long), x*m.sin(long), z]
     VS = np.cross(omega_vector,RS)
-
+    
     print("Radar Site Location Vector (IJK): ", RS)
     print("Radar Site Velocity Vector (IJK): ", VS)
+    print("Radar Site Sidereal Time: ", m.degrees(long))
+    print("Radar Site Latitude: ", Lat)
     
     u,v =  np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
     
