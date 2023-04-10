@@ -40,6 +40,7 @@ if __name__ == "__main__":
     r_sat_ijk = np.dot(rotation_matrix, rho_vect) + RS
     v_sat_ijk = np.dot(rotation_matrix, rho_dot_vect) + VS
 
+    print(long)
     print("Satellite Position Vector: ", r_sat_ijk)
     print("Satellite Velocity Vector: ", v_sat_ijk)    
     
