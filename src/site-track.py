@@ -65,6 +65,7 @@ if __name__ == "__main__":
     RS = [x*m.cos(long), x*m.sin(long), z]
     VS = np.cross(omega_vector,RS)
     
+    #Generate SEZ track vectors and rotation matrix
     rho_vect = ([-rho*m.cos(el)*m.cos(az)],[rho*m.cos(el)*m.sin(az)],[rho*m.sin(el)])
     rho_dot_vect = ([-rho_dot*m.cos(el)*m.cos(az)+rho*m.sin(el)*el_dot*m.cos(az)+rho*m.cos(el)*m.sin(az)*az_dot],
                     [rho_dot*m.cos(el)*m.sin(az)-rho*m.sin(el)*el_dot*m.sin(az)+rho*m.cos(el)*m.cos(az)*az_dot],
@@ -73,6 +74,7 @@ if __name__ == "__main__":
                        [m.sin(lat)*m.sin(long), m.cos(long), m.cos(lat)*m.sin(long)],
                        [-m.cos(lat), 0, m.sin(lat)])
 
+    #Generate R,V vectors for tracked satellite
     r_sat_ijk = np.dot(rotation_matrix, rho_vect) + ([RS[0]],[RS[1]],[RS[2]])
     v_sat_ijk = np.dot(rotation_matrix, rho_dot_vect) + ([VS[0]],[VS[1]],[VS[2]])
 
@@ -83,12 +85,16 @@ if __name__ == "__main__":
     print("Satellite Position Vector: ", r_sat_ijk)
     print("Satellite Velocity Vector: ", v_sat_ijk)
 
+    #Generate IJK orbit track
+    
+    #Generate data for wirefram Earth
     u,v =  np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
     
     px = ae*np.cos(u)*np.sin(v)
     py = ae*np.sin(u)*np.sin(v)
     pz = ae*np.cos(v)
 
+    #Plot
     fig = plt.figure(figsize=(15,15))
 
     ax = fig.add_subplot(111, projection='3d')
