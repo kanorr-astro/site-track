@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 Lat = 39.007                        #geodetic latitude (degrees)
 theta_e = -104.883                  #longitude in east direction(degrees) (Long w is negative)
 H = 2.188464                        #altitude above mean sea level (km)
-date_list = [2, 9, 1970]            #Date [day, month, year]
-UT = [3, 17, 2]                     #Time [hour, minutes, seconds]
+date_list = [1, 1, 1970]            #Date [day, month, year]
+UT = [0, 0, 0]                     #Time [hour, minutes, seconds]
 
 #Constants/Lookups
 month_day = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
